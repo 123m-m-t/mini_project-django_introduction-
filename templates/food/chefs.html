@@ -1,8 +1,6 @@
-<!doctype html>
-<html lang="en">
-
-
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
     <!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
@@ -35,7 +33,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="single_blog_item">
                         <div class="single_blog_img">
-                            <img src="img/team/chefs_1.png" alt="">
+                            <img src="{% static 'img/team/chefs_1.png' %}" alt="">
                         </div>
                         <div class="single_blog_text text-center">
                             <h3>Adam Billiard</h3>
@@ -52,7 +50,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="single_blog_item">
                         <div class="single_blog_img">
-                            <img src="img/team/chefs_2.png" alt="">
+                            <img src="{% static 'img/team/chefs_2.png' %}" alt="">
                         </div>
                         <div class="single_blog_text text-center">
                             <h3>Fred Macyard</h3>
@@ -69,7 +67,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="single_blog_item">
                         <div class="single_blog_img">
-                            <img src="img/team/chefs_3.png" alt="">
+                            <img src="{% static 'img/team/chefs_3.png' %}" alt="">
                         </div>
                         <div class="single_blog_text text-center">
                             <h3>Justin Stuard</h3>
@@ -86,7 +84,7 @@
                 <div class="col-sm-6 col-lg-4 d-none d-sm-block d-lg-none">
                     <div class="single_blog_item">
                         <div class="single_blog_img">
-                            <img src="img/team/chefs_1.png" alt="">
+                            <img src="{% static 'img/team/chefs_1.png' %}" alt="">
                         </div>
                         <div class="single_blog_text text-center">
                             <h3>Justin Stuard</h3>
@@ -125,7 +123,4 @@
     </section>
     <!-- intro_video_bg part start-->
 
-
-</body>
-
-</html>
+{% endblock %}

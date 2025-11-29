@@ -26,15 +26,13 @@
     <link rel="stylesheet" href="{% static 'css/all.css' %}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+</head>
 <body>
-
 {% include 'partials/header.html' %}
-
 {% block content %}
-{% endblock content %}
-
+{% endblock %}
 {% include 'partials/footer.html' %}
+
 
 <!-- JS Files -->
 <script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
@@ -48,8 +46,6 @@
 <script src="{% static 'js/gijgo.min.js' %}"></script>
 <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
 <script src="{% static 'js/custom.js' %}"></script>
-
-{% block extra_scripts %}{% endblock %}
 
 </body>
 </html>
