@@ -38,7 +38,56 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
+    'blog',
+    'food',
+    'taggit',
+    "django_ckeditor_5",
 ]
+
+CKEDITOR_5_UPLOAD_PATH = "blog/"
+CKEDITOR_5_ALLOW_ALL_FILE_TYPES = True
+
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': [
+            'heading', '|',
+            'bold', 'italic', 'underline', 'strikethrough', 'highlight', '|',
+            'alignment', '|',
+            'bulletedList', 'numberedList', 'todoList', '|',
+            'link', 'blockQuote', 'imageUpload', 'mediaEmbed', '|',
+            'insertTable', 'horizontalLine', '|',
+            'undo', 'redo', '|',
+            'code', 'codeBlock', '|',
+            'htmlEmbed', 'sourceEditing'
+        ],
+        'language': 'fa',
+        'height': 500,
+        'width': '100%',
+
+        'image': {
+            'styles': ['full', 'alignLeft', 'alignRight'],
+        },
+
+        'table': {
+            'contentToolbar': [
+                'tableColumn', 'tableRow', 'mergeTableCells'
+            ]
+        },
+
+        'codeBlock': {
+            'languages': [
+                {'language': 'python', 'label': 'Python'},
+                {'language': 'javascript', 'label': 'JavaScript'},
+                {'language': 'html', 'label': 'HTML'},
+                {'language': 'bash', 'label': 'Bash'},
+            ]
+        },
+
+        'placeholder': 'متن خود را اینجا بنویسید...',
+    }
+}
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,0 +1,18 @@
+{% load static %}
+<aside class="single_sidebar_widget popular_post_widget">
+    <h3 class="widget_title">Recent Post</h3>
+
+    {% for post in posts %}
+        <div class="media post_item">
+            {# تصویر پست #}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+
+            <div class="media-body">
+                <a href="#">
+                    <h3>{{ post.title|truncatechars:35 }}</h3>
+                </a>
+                <p>{{ post.created_date|date:"M d, Y" }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</aside>
