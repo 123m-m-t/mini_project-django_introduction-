@@ -28,7 +28,9 @@ def sidebar_categories():
 # ----------------------
 @register.inclusion_tag("blog/sidebar/instagram.html")
 def sidebar_instagram():
-    return {}
+    posts = Post.objects.filter(status=True).order_by("-created_date")[:6]
+    return {"posts": posts}
+
 
 
 # ----------------------
@@ -55,4 +57,17 @@ def sidebar_popular(limit=4):
 def sidebar_tags():
     tags = Tag.objects.all()
     return {"tags": tags}
+
+@register.simple_tag(takes_context=True)
+def post_navigation(context, pid):
+    prev_post = Post.objects.filter(status=True, id__lt=pid).order_by('-id').first()
+    next_post = Post.objects.filter(status=True, id__gt=pid).order_by('id').first()
+
+    # متغیرها را به context اصلی اضافه می‌کنیم
+    context["prev_post"] = prev_post
+    context["next_post"] = next_post
+
+    return ""   # خروجی لازم نیست چون در صفحه از context استفاده می‌کنی
+
+
 

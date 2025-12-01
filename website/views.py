@@ -1,9 +1,11 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect,get_object_or_404
 from .models import Newsletter
+from blog.models import Post
 
 # Create your views here.
 
 def index_view(request):
+
     return render(request, 'website/index.html')
 
 
@@ -23,3 +25,4 @@ def newsletter_view(request):
             Newsletter.objects.get_or_create(email=email)
 
         return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
+
