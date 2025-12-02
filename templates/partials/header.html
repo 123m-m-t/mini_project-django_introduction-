@@ -23,18 +23,19 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Chefs</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Blog
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{% url 'blog:index' %}">Blog</a>
-                                        <a class="dropdown-item" href="#">Elements</a>
-                                    </div>
-                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'blog:index' %}">Blog</a>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'website:contact' %}">Contact</a>
                                 </li>
+                                <li class="nav-item">
+                                    {% if user.is_authenticated %}
+                                    <a href="{% url 'accounts:logout' %}">Logout</a>
+                                    {% else %}
+                                    <a href="{% url 'accounts:auth' %}">Login/Signup</a>
+                                    {% endif %}
+                                </li>
+
                             </ul>
                         </div>
                         <div class="menu_btn">
