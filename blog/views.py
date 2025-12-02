@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect,reverse
 from .models import Post, Category, Comment
 from django.core.paginator import Paginator
 from taggit.models import Tag
@@ -34,12 +34,20 @@ def blog_view(request, page=1, category_slug=None, tag_slug=None, author_usernam
 def blog_single(request, pid):
     post = get_object_or_404(Post, id=pid, status=True)
 
+    # افزایش بازدید
     post.counted_views += 1
     post.save()
+
+    if post.login_require and not request.user.is_authenticated:
+        return redirect(f"{reverse('accounts:auth')}?next={request.path}")
 
     comments = Comment.objects.filter(post=post, approved=True)
 
     if request.method == "POST":
+
+        if not request.user.is_authenticated:
+            return redirect(f"{reverse('accounts:auth')}?next={request.path}")
+
         name = request.POST.get("name")
         email = request.POST.get("email")
         message = request.POST.get("comment")
@@ -51,6 +59,7 @@ def blog_single(request, pid):
             email=email,
             subject=subject if subject else "No subject",
             message=message,
+            approved=False,
         )
 
         return redirect("blog:single", pid=pid)

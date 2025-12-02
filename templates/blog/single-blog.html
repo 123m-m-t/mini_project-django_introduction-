@@ -170,7 +170,7 @@
                     <p>No comments yet.</p>
                     {% endfor %}
                 </div>
-
+                {% if user.is_authenticated or not post.login_require %}
                 <div class="comment-form">
                     <h4>Leave a Reply</h4>
                     <form class="form-contact comment_form" action="" method="post">
@@ -207,6 +207,10 @@
                         </div>
                     </form>
                 </div>
+                {% else %}
+                <p>You must login to comment.</p>
+                <a class="btn btn-primary" href="{% url 'accounts:auth' %}?next={{ request.path }}">Login to comment</a>
+                {% endif %}
             </div>
             <div class="col-lg-4">
                 <div class="blog_right_sidebar">
