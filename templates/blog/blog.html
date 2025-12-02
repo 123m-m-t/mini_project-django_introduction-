@@ -75,6 +75,10 @@
                                    href="{% url 'blog:blog_tag_page' tag_slug page_obj.previous_page_number %}">
                                     <i class="ti-angle-left"></i>
                                 </a>
+                                {% elif filter_date %}
+                                <a class="page-link" href="{% url 'blog:blog_date' filter_date.year filter_date.month filter_date.day %}?page={{ page_obj.previous_page_number }}">
+                                    <i class="ti-angle-left"></i>
+                                </a>
                                 {% else %}
                                 <a class="page-link"
                                    href="{% url 'blog:blog_page' page_obj.previous_page_number %}">
@@ -97,6 +101,10 @@
                                    href="{% url 'blog:blog_tag_page' tag_slug num %}">
                                     {{ num }}
                                 </a>
+                                {% elif filter_date %}
+                                <a class="page-link" href="{% url 'blog:blog_date' filter_date.year filter_date.month filter_date.day %}?page={{ num }}">
+                                    {{ num }}
+                                </a>
                                 {% else %}
                                 <a class="page-link"
                                    href="{% url 'blog:blog_page' num %}">
@@ -117,6 +125,11 @@
                                 {% elif tag_slug %}
                                 <a class="page-link"
                                    href="{% url 'blog:blog_tag_page' tag_slug page_obj.next_page_number %}">
+                                    <i class="ti-angle-right"></i>
+                                </a>
+                                {% elif filter_date %}
+                                <a class="page-link"
+                                   href="{% url 'blog:blog_date' filter_date.year filter_date.month filter_date.day %}?page={{ page_obj.next_page_number }}">
                                     <i class="ti-angle-right"></i>
                                 </a>
                                 {% else %}

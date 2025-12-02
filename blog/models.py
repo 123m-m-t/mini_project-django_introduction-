@@ -44,7 +44,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     email = models.EmailField()
-    subject = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255, blank=True, null=True)
     message = models.TextField()
     approved = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -54,4 +54,4 @@ class Comment(models.Model):
         ordering = ['-created_date']
 
     def __str__(self):
-        return self.name
+        return f"{self.name}: {self.message[:30]}"

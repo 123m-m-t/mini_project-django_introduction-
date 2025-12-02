@@ -1,0 +1,52 @@
+{% load static %}
+<section class="blog_item_section blog_section section_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5">
+                <div class="section_tittle">
+                    <p>Recent News</p>
+                    <h2>Latest From Blog</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-sm-6 col-lg-4">
+                <div class="single_blog_item">
+                    <div class="single_blog_img">
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                    </div>
+                    <div class="single_blog_text">
+                        <div class="date">
+                            <a href="{% url 'blog:blog_date' post.created_date.year post.created_date.month post.created_date.day %}"
+                               class="date_item">
+                                {{ post.created_date|date:"M d, Y" }}
+                            </a>
+
+                            {% with post.category.all|first as cat %}
+                            {% if cat %}
+                            <a href="{% url 'blog:blog_category' cat.slug %}" class="date_item">
+                                <span>#</span> {{ cat.name }}
+                            </a>
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+
+                        <h3>
+                            <a href="{% url 'blog:single' post.id %}">
+                                {{ post.title }}
+                            </a>
+                        </h3>
+
+                        <a href="{% url 'blog:single' post.id %}" class="btn_3">
+                            Read More <img src="{% static 'img/icon/left_1.svg' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>

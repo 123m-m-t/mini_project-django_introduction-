@@ -20,8 +20,9 @@ class PostAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
     empty_value_display = '-empty-'
-    list_display = ('name','post','approved','created_date')
-    list_filter = ('post','approved')
+    list_display = ('name','post','approved','created_date','subject')
+    list_filter = ['post']
+    list_editable = ['approved']
     search_fields = ['name','post']
 
 

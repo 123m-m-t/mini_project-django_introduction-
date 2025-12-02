@@ -26,3 +26,4 @@ def newsletter_view(request):
 
         return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
 
+
