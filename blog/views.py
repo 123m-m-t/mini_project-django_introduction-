@@ -2,11 +2,18 @@ from django.shortcuts import render, get_object_or_404, redirect,reverse
 from .models import Post, Category, Comment
 from django.core.paginator import Paginator
 from taggit.models import Tag
+from .forms import CommentForm
+from django.contrib import messages
+
 
 
 # Create your views here.
 
-def blog_view(request, page=1, category_slug=None, tag_slug=None, author_username=None):
+def blog_view(request,
+              page=1,
+              category_slug=None,
+              tag_slug=None,
+              author_username=None):
     posts = Post.objects.filter(status=True)
 
     if category_slug:
@@ -24,12 +31,13 @@ def blog_view(request, page=1, category_slug=None, tag_slug=None, author_usernam
     page_obj = paginator.get_page(page)
 
     return render(request, 'blog/blog.html', {
-        'page_obj': page_obj,
-        'category_slug': category_slug,
-        'tag_slug': tag_slug,
-        'author_username': author_username,
-        'posts': posts
+        "page_obj": page_obj,
+        "posts": page_obj,
+        "category_slug": category_slug,
+        "tag_slug": tag_slug,
+        "author_username": author_username,
     })
+
 
 def blog_single(request, pid):
     post = get_object_or_404(Post, id=pid, status=True)
@@ -38,37 +46,38 @@ def blog_single(request, pid):
     post.counted_views += 1
     post.save()
 
+    # اگر لاگین لازم است
     if post.login_require and not request.user.is_authenticated:
         return redirect(f"{reverse('accounts:auth')}?next={request.path}")
 
     comments = Comment.objects.filter(post=post, approved=True)
 
+    # -----------------------
+    # ارسال کامنت
+    # -----------------------
     if request.method == "POST":
 
+        # فقط کاربر لاگین‌شده بتواند کامنت بفرستد
         if not request.user.is_authenticated:
             return redirect(f"{reverse('accounts:auth')}?next={request.path}")
 
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        message = request.POST.get("comment")
-        subject = request.POST.get("subject")
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.approved = False
+            comment.save()
+            messages.success(request, "Your comment has been submitted and is awaiting approval.")
+            return redirect("blog:single", pid=pid)
 
-        Comment.objects.create(
-            post=post,
-            name=name,
-            email=email,
-            subject=subject if subject else "No subject",
-            message=message,
-            approved=False,
-        )
-
-        return redirect("blog:single", pid=pid)
+    else:
+        form = CommentForm()
 
     return render(request, "blog/single-blog.html", {
         "post": post,
         "comments": comments,
+        "form": form,
     })
-
 
 def blog_search(request):
     query = request.GET.get("q", "").strip()

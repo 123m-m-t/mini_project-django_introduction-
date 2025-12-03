@@ -8,13 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-{% if messages %}
-<div class="messages">
-    {% for message in messages %}
-    <div class="msg {{ message.tags }}">{{ message }}</div>
-    {% endfor %}
-</div>
-{% endif %}
 <div class="wrapper">
     <div class="title-text">
         <div class="title login">Login Form</div>

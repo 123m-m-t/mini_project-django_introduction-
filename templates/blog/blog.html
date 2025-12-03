@@ -45,11 +45,12 @@
 
                             <ul class="blog-info-link">
                                 <li>
-                                    <a href="#"><i class="far fa-user"></i> {{ post.author }}</a>
+                                    <a href="{% url 'blog:author' post.author.username %}"><i class="far fa-user"></i>
+                                        {{ post.author }}</a>
                                 </li>
 
                                 <li>
-                                    <a href="#"><i class="far fa-comments"></i> {{ post.counted_views }} Views</a>
+                                    <a><i class="far fa-comments"></i> {{ post.counted_views }} Views</a>
                                 </li>
                             </ul>
                         </div>
@@ -76,9 +77,22 @@
                                     <i class="ti-angle-left"></i>
                                 </a>
                                 {% elif filter_date %}
-                                <a class="page-link" href="{% url 'blog:blog_date' filter_date.year filter_date.month filter_date.day %}?page={{ page_obj.previous_page_number }}">
+                                <a class="page-link"
+                                   href="{% url 'blog:blog_date' filter_date.year filter_date.month filter_date.day %}?page={{ page_obj.previous_page_number }}">
                                     <i class="ti-angle-left"></i>
                                 </a>
+                                {% elif author_username %}
+                                {% if page_obj.previous_page_number == 1 %}
+                                <a class="page-link"
+                                   href="{% url 'blog:author' author_username %}">
+                                    <i class="ti-angle-left"></i>
+                                </a>
+                                {% else %}
+                                <a class="page-link"
+                                   href="{% url 'blog:author_page' author_username page_obj.previous_page_number %}">
+                                    <i class="ti-angle-left"></i>
+                                </a>
+                                {% endif %}
                                 {% else %}
                                 <a class="page-link"
                                    href="{% url 'blog:blog_page' page_obj.previous_page_number %}">
@@ -102,9 +116,20 @@
                                     {{ num }}
                                 </a>
                                 {% elif filter_date %}
-                                <a class="page-link" href="{% url 'blog:blog_date' filter_date.year filter_date.month filter_date.day %}?page={{ num }}">
+                                <a class="page-link"
+                                   href="{% url 'blog:blog_date' filter_date.year filter_date.month filter_date.day  num%}">
                                     {{ num }}
                                 </a>
+                                {% elif author_username %}
+                                {% if num == 1 %}
+                                <a class="page-link" href="{% url 'blog:author' author_username %}">
+                                    {{ num }}
+                                </a>
+                                {% else %}
+                                <a class="page-link" href="{% url 'blog:author_page' author_username num %}">
+                                    {{ num }}
+                                </a>
+                                {% endif %}
                                 {% else %}
                                 <a class="page-link"
                                    href="{% url 'blog:blog_page' num %}">
@@ -130,6 +155,11 @@
                                 {% elif filter_date %}
                                 <a class="page-link"
                                    href="{% url 'blog:blog_date' filter_date.year filter_date.month filter_date.day %}?page={{ page_obj.next_page_number }}">
+                                    <i class="ti-angle-right"></i>
+                                </a>
+                                {% elif author_username %}
+                                <a class="page-link"
+                                   href="{% url 'blog:author_page' author_username page_obj.next_page_number %}">
                                     <i class="ti-angle-right"></i>
                                 </a>
                                 {% else %}

@@ -20,3 +20,15 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.name
+
+class Chef(models.Model):
+    image = models.ImageField(upload_to='chefs/',default='chefs/chefs_1.png')
+    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    status = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-title']
+
+    def __str__(self):
+        return self.name

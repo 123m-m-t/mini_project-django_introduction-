@@ -4,6 +4,7 @@
 {% load blog_tags %}
 
 
+
 <!-- breadcrumb start-->
 <section class="breadcrumb breadcrumb_bg">
     <div class="container">
@@ -19,6 +20,20 @@
     </div>
 </section>
 <!-- breadcrumb start-->
+
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
 <!--================Blog Area =================-->
 <section class="blog_area single-post-area section_padding">
     <div class="container">
@@ -38,7 +53,7 @@
                                 {% endif %}
                                 {% endfor %}
                             </li>
-                            <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
+                            <li><a><i class="far fa-comments"></i> 03 Comments</a></li>
                         </ul>
                         {{ post.content|safe }}
                     </div>
@@ -129,12 +144,9 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex align-items-center">
                                             <h5>
-                                                <a href="#">{{ comment.name }}</a>
+                                                <a>{{ comment.name }}</a>
                                             </h5>
                                             <p class="date">{{ comment.created_date|date:"F j, Y \a\t H:i" }}</p>
-                                        </div>
-                                        <div class="reply-btn">
-                                            <a href="#" class="btn-reply text-uppercase">reply</a>
                                         </div>
                                     </div>
                                 </div>
@@ -153,26 +165,25 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                    <textarea class="form-control w-100" name="comment" cols="30" rows="9"
-                              placeholder="Write Comment"></textarea>
+                                    {{ form.message }}
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control" name="name" type="text" placeholder="Name">
+                                    {{ form.name }}
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control" name="email" type="email" placeholder="Email">
+                                    {{ form.email }}
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <input class="form-control" name="subject" type="text" placeholder="Subject">
+                                    {{ form.subject }}
                                 </div>
                             </div>
                         </div>

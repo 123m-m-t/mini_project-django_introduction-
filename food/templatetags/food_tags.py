@@ -10,3 +10,4 @@ def get_categories():
 @register.simple_tag
 def get_menu_by_category(category):
     return Menu.objects.filter(category=category)
+

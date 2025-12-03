@@ -8,7 +8,7 @@
             <img src="{{ post.image.url }}" alt="{{ post.title }}">
 
             <div class="media-body">
-                <a href="#">
+                <a href="{% url 'blog:single' post.id %}">
                     <h3>{{ post.title|truncatechars:35 }}</h3>
                 </a>
                 <p>{{ post.created_date|date:"M d, Y" }}</p>

@@ -42,7 +42,6 @@ def auth_view(request):
 
             if user is not None:
                 login(request, user)
-                # اگر next هست → همانجا برود
                 if next_url:
                     return redirect(next_url)
                 return redirect("website:index")
@@ -53,4 +52,5 @@ def auth_view(request):
 
 def logout_view(request):
     logout(request)
+    messages.success(request, "You have successfully logged in.")
     return redirect("/")
