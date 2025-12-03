@@ -28,6 +28,7 @@ urlpatterns = [
     path('ckeditor5/', include('django_ckeditor_5.urls')),
     path('accounts/', include('accounts.urls')),
     path('food/', include('food.urls')),
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
