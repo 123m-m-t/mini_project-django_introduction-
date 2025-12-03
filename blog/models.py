@@ -17,9 +17,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
-
-
 class Post(models.Model):
     image = models.ImageField(upload_to='blog/', default='blog/single_blog_1.png')
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)

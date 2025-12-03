@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.urls import path, include
 from .views import about_view,contact_view,index_view,newsletter_view
-import website
 
 app_name = 'website'
 
