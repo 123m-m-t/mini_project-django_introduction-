@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 # Create your models here.
 class Category(models.Model):
@@ -32,3 +34,20 @@ class Chef(models.Model):
 
     def __str__(self):
         return self.name
+
+class Reservation(models.Model):
+    name = models.CharField(max_length=120)
+    email = models.EmailField()
+    persons = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(20)])
+    phone = models.CharField(max_length=30)
+    date = models.DateField()
+    time_slot = models.CharField(max_length=30)
+    note = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-date','created_at']
+
+
+    def __str__(self):
+        return f"{self.name} - {self.date} - {self.time_slot}"

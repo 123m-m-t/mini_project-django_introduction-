@@ -1,7 +1,9 @@
 {% load static %}
+
 <!--::regervation_part start::-->
-<section class="regervation_part section_padding">
+<section class="regervation_part section_padding" id="reservation">
     <div class="container">
+
         <div class="row">
             <div class="col-xl-5">
                 <div class="section_tittle">
@@ -10,62 +12,80 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-6">
                 <div class="regervation_part_iner">
-                    <form>
+
+                    <form method="post" action="{% url 'website:index' %}#reservation">
+                        {% csrf_token %}
+
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="Name *">
+                                {{ reservation_form.name }}
+                                {% if reservation_form.name.errors %}
+                                <small class="text-danger">{{ reservation_form.name.errors }}</small>
+                                {% endif %}
                             </div>
+
                             <div class="form-group col-md-6">
-                                <input type="password" class="form-control" id="inputPassword4"
-                                       placeholder="Email address *">
+                                {{ reservation_form.email }}
+                                {% if reservation_form.email.errors %}
+                                <small class="text-danger">{{ reservation_form.email.errors }}</small>
+                                {% endif %}
                             </div>
+
                             <div class="form-group col-md-6">
-                                <select class="form-control" id="Select">
-                                    <option value="1" selected>Persons *</option>
-                                    <option value="2">Number of guests 1</option>
-                                    <option value="3">Number of guests 2</option>
-                                    <option value="4">Number of guests 3</option>
-                                    <option value="5">Number of guests 4</option>
-                                </select>
+                                {{ reservation_form.persons }}
+                                {% if reservation_form.persons.errors %}
+                                <small class="text-danger">{{ reservation_form.persons.errors }}</small>
+                                {% endif %}
                             </div>
+
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" id="pnone" placeholder="Phone number *">
+                                {{ reservation_form.phone }}
+                                {% if reservation_form.phone.errors %}
+                                <small class="text-danger">{{ reservation_form.phone.errors }}</small>
+                                {% endif %}
                             </div>
+
                             <div class="form-group col-md-6">
-                                <div class="input-group date">
-                                    <input id="datepicker" type="text" class="form-control" placeholder="Date *"/>
-                                </div>
+                                {{ reservation_form.date }}
+                                {% if reservation_form.date.errors %}
+                                <small class="text-danger">{{ reservation_form.date.errors }}</small>
+                                {% endif %}
                             </div>
+
                             <div class="form-group col-md-6">
-                                <select class="form-control" id="Select2">
-                                    <option value="" selected>Time *</option>
-                                    <option value="1">8 AM TO 10AM</option>
-                                    <option value="1">10 AM TO 12PM</option>
-                                    <option value="1">12PM TO 2PM</option>
-                                    <option value="1">2PM TO 4PM</option>
-                                    <option value="1">4PM TO 6PM</option>
-                                    <option value="1">6PM TO 8PM</option>
-                                    <option value="1">4PM TO 10PM</option>
-                                    <option value="1">10PM TO 12PM</option>
-                                </select>
+                                {{ reservation_form.time_slot }}
+                                {% if reservation_form.time_slot.errors %}
+                                <small class="text-danger">{{ reservation_form.time_slot.errors }}</small>
+                                {% endif %}
                             </div>
+
                             <div class="form-group col-md-12">
-                                    <textarea class="form-control" id="Textarea" rows="4"
-                                              placeholder="Your Note *"></textarea>
+                                {{ reservation_form.note }}
+                                {% if reservation_form.note.errors %}
+                                <small class="text-danger">{{ reservation_form.note.errors }}</small>
+                                {% endif %}
                             </div>
                         </div>
-
 
                         <div class="regerv_btn">
-                            <a href="#" class="btn_4">Book A Table</a>
+                            {% if user.is_authenticated %}
+                            <button type="submit" class="btn_4">Book A Table</button>
+                            {% else %}
+                            <a class="btn_4" href="/accounts/auth/?form_type=login">Login to Book</a>
+                            {% endif %}
                         </div>
+
+
                     </form>
+
                 </div>
             </div>
         </div>
+
     </div>
 </section>
 <!--::regervation_part end::-->

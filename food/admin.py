@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Menu,Category,Chef
+from .models import Menu,Category,Chef,Reservation
 # Register your models here.
 
 class MenuAdmin(admin.ModelAdmin):
@@ -27,6 +27,19 @@ class ChefAdmin(admin.ModelAdmin):
         'status',
     ]
 
+class ReservationAdmin(admin.ModelAdmin):
+    empty_value_display = '-empty-'
+    list_display = [
+        'name',
+        'email',
+        'phone',
+        'persons',
+        'date',
+        'time_slot',
+        'note',
+    ]
+
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(Chef, ChefAdmin)
+admin.site.register(Reservation, ReservationAdmin)
 admin.site.register(Category)

@@ -3,6 +3,7 @@ from .models import Newsletter
 from .forms import ContactForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from food.forms import ReservationForm
 
 @login_required(login_url="/accounts/auth/?form_type=login")
 def contact_view(request):
@@ -15,10 +16,22 @@ def contact_view(request):
         form = ContactForm()
 
     return render(request, "website/contact.html", {"form": form})
+
 def index_view(request):
+    form = ReservationForm()
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            return redirect("/accounts/auth/?form_type=login")
 
-    return render(request, 'website/index.html')
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have successfully reserved.")
+            return redirect("website:index")
+        else:
+            messages.error(request, "Please correct the error below.")
 
+    return render(request, "website/index.html", {"reservation_form": form})
 
 def about_view(request):
     return render(request, 'website/about.html')
@@ -41,4 +54,5 @@ def newsletter_view(request):
             messages.info(request, "You are already subscribed.")
 
         return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))
+
 
