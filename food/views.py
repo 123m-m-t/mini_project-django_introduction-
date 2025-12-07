@@ -2,7 +2,6 @@ from django.shortcuts import render
 from .models import Chef
 from django.core.paginator import Paginator
 
-
 def chefs_view(request,page=1):
     chefs=Chef.objects.filter(status=True)
 

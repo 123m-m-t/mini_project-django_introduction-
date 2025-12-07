@@ -2,14 +2,14 @@ from django import forms
 from .models import Reservation
 
 TIME_SLOTS = [
-    ("08-10", "8 AM TO 10AM"),
-    ("10-12", "10 AM TO 12PM"),
-    ("12-14", "12PM TO 2PM"),
-    ("14-16", "2PM TO 4PM"),
-    ("16-18", "4PM TO 6PM"),
-    ("18-20", "6PM TO 8PM"),
-    ("20-22", "8PM TO 10PM"),
-    ("22-24", "10PM TO 12AM"),
+    ("08-10", "8 AM TO 10 AM"),
+    ("10-12", "10 AM TO 12 PM"),
+    ("12-14", "12 PM TO 2 PM"),
+    ("14-16", "2 PM TO 4 PM"),
+    ("16-18", "4 PM TO 6 PM"),
+    ("18-20", "6 PM TO 8PM"),
+    ("20-22", "8 PM TO 10 PM"),
+    ("22-24", "10 PM TO 12 AM"),
 ]
 
 class ReservationForm(forms.ModelForm):

@@ -36,7 +36,6 @@ def index_view(request):
 def about_view(request):
     return render(request, 'website/about.html')
 
-
 @login_required(login_url="/accounts/auth/?form_type=login")
 def newsletter_view(request):
     if request.method == 'POST':
