@@ -1,5 +1,9 @@
 from django import forms
-from .models import Comment
+
+from food.models import Reservation
+from .models import Comment,Post
+from django.contrib.admin.widgets import AdminDateWidget
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -32,3 +36,12 @@ class CommentForm(forms.ModelForm):
         if not subject:
             return "No subject"
         return subject
+
+
+class PostAdminForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = "__all__"
+        widgets = {
+            "updated_date": AdminDateWidget(),
+        }

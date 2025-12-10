@@ -21,7 +21,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='blog/', default='blog/single_blog_1.png')
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=255)
-    content = CKEditor5Field('Content', config_name='default')  # ← CKEditor 5
+    content = CKEditor5Field('Content', config_name='default')
     tags = TaggableManager()
     category = models.ManyToManyField(Category)
     counted_views = models.IntegerField(default=0)

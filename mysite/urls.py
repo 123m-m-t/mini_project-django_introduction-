@@ -20,7 +20,6 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
-
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
@@ -29,7 +28,6 @@ urlpatterns = [
     path('ckeditor5/', include('django_ckeditor_5.urls')),
     path('accounts/', include('accounts.urls')),
     path('food/', include('food.urls')),
-
 ]
 
 if settings.DEBUG:
