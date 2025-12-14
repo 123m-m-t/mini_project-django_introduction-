@@ -237,3 +237,17 @@ form .btn input[type="submit"] {
     color: #080;
     border: 1px solid #99ff99;
 }
+
+.form-inner form .field.captcha-field {
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.captcha-field img {
+    display: block;
+    margin: 0 auto 8px auto;
+}
+
+.captcha-field input {
+    height: 50px;
+}

@@ -30,12 +30,14 @@
                 <input type="hidden" name="next" value="{{ request.GET.next }}">
 
                 <div class="field">
-                    <input type="text" name="username" placeholder="Username" required>
+                    {{ login_form.username }}
                 </div>
                 <div class="field">
-                    <input type="password" name="password" placeholder="Password" required>
+                    {{ login_form.password }}
                 </div>
-
+                <div class="field captcha-field">
+                    {{ login_form.captcha }}
+                </div>
                 <div class="field btn">
                     <div class="btn-layer"></div>
                     <input type="submit" value="Login">
@@ -47,13 +49,16 @@
                 <input type="hidden" name="form_type" value="signup">
 
                 <div class="field">
-                    <input type="text" name="username" placeholder="Username" required>
+                    {{ signup_form.username }}
                 </div>
                 <div class="field">
-                    <input type="password" name="password" placeholder="Password" required>
+                    {{ signup_form.password }}
                 </div>
                 <div class="field">
-                    <input type="password" name="password2" placeholder="Confirm password" required>
+                    {{ signup_form.password2 }}
+                </div>
+                <div class="field captcha-field">
+                    {{ signup_form.captcha }}
                 </div>
                 <div class="field btn">
                     <div class="btn-layer"></div>
